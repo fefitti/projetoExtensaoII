@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <h1>Cadastro de Produtos</h1>
+    <form method="POST" action="/cadastro">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+
+        <label for="descricao">Descrição:</label>
+        <input type="text" id="descricao" name="descricao" required>
+
+        <label for="valor_compra">Valor de Compra:</label>
+        <input type="number" step="0.01" id="valor_compra" name="valor_compra" required>
+
+        <label for="valor_venda">Valor de Venda:</label>
+        <input type="number" step="0.01" id="valor_venda" name="valor_venda" required>
+
+        <label for="estoque">Estoque:</label>
+        <input type="number" id="estoque" name="estoque" required>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <h2>Produtos Cadastrados</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Valor Compra</th>
+                <th>Valor Venda</th>
+                <th>Estoque</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for produto in produtos %}
+            <tr class="{% if produto[5] < 5 %}baixo-estoque{% endif %}">
+                <td>{{ produto[1] }}</td>
+                <td>{{ produto[2] }}</td>
+                <td>R$ {{ produto[3] }}</td>
+                <td>R$ {{ produto[4] }}</td>
+                <td>{{ produto[5] }}</td>
+                <td>
+                    <a href="/editar/{{ produto[0] }}"><button class="edit">Editar</button></a>
+                    <a href="/excluir/{{ produto[0] }}" onclick="return confirm('Tem certeza que deseja excluir este produto?');">
+                        <button class="delete">Excluir</button>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+

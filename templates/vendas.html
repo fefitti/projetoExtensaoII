@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <h1>Registrar Venda</h1>
+    <form method="POST" action="/vendas">
+        <label for="produto_id">Produto:</label>
+        <select name="produto_id" id="produto_id" required>
+            {% for p in produtos %}
+                <option value="{{ p[0] }}">{{ p[1] }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" name="quantidade" id="quantidade" required>
+
+        <button type="submit">Registrar Venda</button>
+    </form>
+</div>
+{% endblock %}
+

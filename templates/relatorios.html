@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <h1>Relatórios de Vendas</h1>
+    <form method="get">
+        <label for="periodo">Período:</label>
+        <select name="periodo" id="periodo">
+            <option value="diario" {% if periodo == 'diario' %}selected{% endif %}>Diário</option>
+            <option value="semanal" {% if periodo == 'semanal' %}selected{% endif %}>Semanal</option>
+            <option value="mensal" {% if periodo == 'mensal' %}selected{% endif %}>Mensal</option>
+        </select>
+        <button type="submit">Filtrar</button>
+    </form>
+
+    <h3 style="margin-top: 30px;">Resumo</h3>
+    <ul style="list-style: none; padding-left: 0; font-size: 16px;">
+        <li><strong>Total de Vendas:</strong> R$ {{ total_vendas }}</li>
+        <li><strong>Total de Despesas:</strong> R$ {{ total_despesas }}</li>
+        <li><strong>Total de Lucros:</strong> R$ {{ total_lucros }}</li>
+    </ul>
+
+    <h3>Detalhes</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Data</th>
+                <th>Lucro</th>
+                <th>Total Venda</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for v in vendas %}
+            <tr>
+                <td>{{ v[1] }}</td>
+                <td>{{ v[2] }}</td>
+                <td>{{ v[3] }}</td>
+                <td>R$ {{ v[4] }}</td>
+                <td>R$ {{ v[6] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
